@@ -5,12 +5,14 @@ import FAQ from "./components/FAQ";
 import AboutUs from "./components/AboutUs";
 import FastagBanner from "./components/FastagBanner";
 import HeroSection from "./components/HeroSection";
+import HeroBanner from "./components/HeroBanner";
 
 function App() {
   return (
     <div>
       <Navbar />
       <HeroSection />
+      <HeroBanner />
       <AboutUs />
       <FAQ />
       <FastagBanner />
