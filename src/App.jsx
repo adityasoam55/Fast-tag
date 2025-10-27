@@ -6,6 +6,7 @@ import AboutUs from "./components/AboutUs";
 import FastagBanner from "./components/FastagBanner";
 import HeroSection from "./components/HeroSection";
 import HeroBanner from "./components/HeroBanner";
+import ProvidersSection from "./components/ProvidersSection";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Navbar />
       <HeroSection />
       <HeroBanner />
+      <ProvidersSection />
       <AboutUs />
       <FAQ />
       <FastagBanner />
