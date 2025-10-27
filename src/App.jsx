@@ -1,25 +1,23 @@
-import React from "react";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import FAQ from "./components/FAQ";
-import AboutUs from "./components/AboutUs";
-import FastagBanner from "./components/FastagBanner";
-import HeroSection from "./components/HeroSection";
-import HeroBanner from "./components/HeroBanner";
-import ProvidersSection from "./components/ProvidersSection";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import PrivateRoute from "./components/PrivateRoute";
+import Home from "./components/Home";
 
 function App() {
   return (
-    <div>
-      <Navbar />
-      <HeroSection />
-      <HeroBanner />
-      <ProvidersSection />
-      <AboutUs />
-      <FAQ />
-      <FastagBanner />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
