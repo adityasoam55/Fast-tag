@@ -1,10 +1,9 @@
+// src/pages/Dashboard.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/layout/SideBar";
 import DashboardNavbar from "../components/layout/DashboardNavbar";
-import TopBanner from "../components/sections/TopBanner";
-import ProvidersSectionInteractive from "../components/sections/ProvidersSectionInteractive";
-import FAQ from "../components/sections/FAQ";
+import DashboardHome from "./DashboardHome"; // <-- renamed import
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -46,7 +45,8 @@ export default function Dashboard() {
     }
     sessionStorage.setItem("fastag_balance", String(balance));
     sessionStorage.setItem("fastag_txns", JSON.stringify(txns));
-  }, []); // eslint-disable-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // run once on mount
 
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
@@ -80,7 +80,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
-      {/* Dashboard Navbar */}
+      {/* Dashboard Navbar (only on small screens) */}
       <div className="block lg:hidden fixed top-0 left-0 w-full z-50">
         <DashboardNavbar
           onMenuClick={() => setMobileSidebarOpen(true)}
@@ -89,24 +89,16 @@ export default function Dashboard() {
       </div>
 
       <div className="flex flex-1 max-md:pt-12">
-        {" "}
-        {/* space for fixed navbar */}
         {/* Sidebar */}
         <Sidebar
           onLogout={handleLogout}
           mobileOpen={mobileSidebarOpen}
           onClose={() => setMobileSidebarOpen(false)}
         />
-        <main className="flex-1 p-6 overflow-auto">
-          {/* TopBanner hidden on small screens */}
-          <div className="hidden lg:block">
-            <TopBanner balance={balance} onAddMoney={handleAddMoney} />
-          </div>
 
-          <div className="max-w-7xl mx-auto px-4">
-            <ProvidersSectionInteractive />
-          </div>
-          <FAQ />
+        <main className="flex-1 p-6 overflow-auto">
+          {/* DashboardHome component handles TopBanner (hidden on small screens), providers and FAQ */}
+          <DashboardHome balance={balance} onAddMoney={handleAddMoney} />
         </main>
       </div>
     </div>
