@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FiMenu, FiX, FiUser, FiCreditCard } from "react-icons/fi";
-import LoginModalEmailJS from "./LoginModalEmailJS"; // path to component
+import LoginModalEmailJS from "../auth/LoginModalEmailJS"; // path to component
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,34 +21,6 @@ export default function Navbar() {
               <h1 className="text-xl font-bold text-blue-600">
                 FASTag Recharge
               </h1>
-            </div>
-
-            {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-8">
-              <a
-                href="#"
-                className="text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Home
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Services
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Recharge
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Contact
-              </a>
             </div>
 
             {/* Right Icons */}
@@ -83,32 +55,9 @@ export default function Navbar() {
         {isOpen && (
           <div className="md:hidden bg-white shadow-lg border-t">
             <div className="px-4 py-3 space-y-2">
-              <a
-                href="#"
-                className="block text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Home
-              </a>
-              <a
-                href="#"
-                className="block text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Services
-              </a>
-              <a
-                href="#"
-                className="block text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Recharge
-              </a>
-              <a
-                href="#"
-                className="block text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Contact
-              </a>
+              {/* Removed center menu links */}
 
-              <div className="flex items-center space-x-4 pt-3 border-t mt-2">
+              <div className="flex items-center space-x-4 pt-3">
                 <button
                   className="text-gray-600 hover:text-blue-600"
                   onClick={() => {
