@@ -1,7 +1,7 @@
 // src/pages/Dashboard.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../components/layout/Sidebar";
+import Sidebar from "../components/layout/SideBar";
 import TopBanner from "../components/sections/TopBanner";
 import ProvidersSectionInteractive from "../components/sections/ProvidersSectionInteractive";
 import { FiMenu } from "react-icons/fi";
