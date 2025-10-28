@@ -29,7 +29,11 @@ export default function ProvidersSectionInteractive() {
   return (
     <section className="py-6">
       <div className="max-w-7xl mx-auto px-4">
-        <img src="/logo.png" className="mx-auto h-12 mb-3" alt="logo" />
+        <img
+          src="/logo.png"
+          className="mx-auto h-12 mb-3 max-md:hidden md:mt-6"
+          alt="logo"
+        />
         <h3 className="text-xl text-center font-semibold mb-4">
           Select your FasTag Providers
         </h3>

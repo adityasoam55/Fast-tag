@@ -1,10 +1,10 @@
-// src/pages/Dashboard.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/layout/SideBar";
+import DashboardNavbar from "../components/layout/DashboardNavbar";
 import TopBanner from "../components/sections/TopBanner";
 import ProvidersSectionInteractive from "../components/sections/ProvidersSectionInteractive";
-import { FiMenu } from "react-icons/fi";
+import FAQ from "../components/sections/FAQ";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -20,9 +20,7 @@ export default function Dashboard() {
     if (saved) {
       try {
         return JSON.parse(saved);
-      } catch {
-        // ignore and fallback
-      }
+      } catch {}
     }
     return [
       {
@@ -48,16 +46,12 @@ export default function Dashboard() {
     }
     sessionStorage.setItem("fastag_balance", String(balance));
     sessionStorage.setItem("fastag_txns", JSON.stringify(txns));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // eslint-disable-line
 
-  // state controlling mobile overlay sidebar
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   function handleLogout() {
-    sessionStorage.removeItem("fastag_user_email");
-    sessionStorage.removeItem("fastag_otp");
-    sessionStorage.removeItem("fastag_otp_exp");
+    sessionStorage.clear();
     navigate("/", { replace: true });
   }
 
@@ -85,35 +79,36 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen flex bg-slate-50">
-      {/* Sidebar (desktop + mobile overlay handled internally) */}
-      <Sidebar
-        onLogout={handleLogout}
-        mobileOpen={mobileSidebarOpen}
-        onClose={() => setMobileSidebarOpen(false)}
-      />
+    <div className="min-h-screen flex flex-col bg-slate-50">
+      {/* Dashboard Navbar */}
+      <div className="block lg:hidden fixed top-0 left-0 w-full z-50">
+        <DashboardNavbar
+          onMenuClick={() => setMobileSidebarOpen(true)}
+          onLogout={handleLogout}
+        />
+      </div>
 
-      <main className="flex-1 p-6 overflow-auto">
-        {/* mobile hamburger button - shows only on small screens */}
-        {!mobileSidebarOpen && (
-          <button
-            onClick={() => setMobileSidebarOpen(true)}
-            className="lg:hidden fixed top-20 left-4 z-50 p-2 bg-white/90 rounded-md shadow-md"
-            aria-label="Open menu"
-          >
-            <FiMenu size={20} />
-          </button>
-        )}
+      <div className="flex flex-1 max-md:pt-12">
+        {" "}
+        {/* space for fixed navbar */}
+        {/* Sidebar */}
+        <Sidebar
+          onLogout={handleLogout}
+          mobileOpen={mobileSidebarOpen}
+          onClose={() => setMobileSidebarOpen(false)}
+        />
+        <main className="flex-1 p-6 overflow-auto">
+          {/* TopBanner hidden on small screens */}
+          <div className="hidden lg:block">
+            <TopBanner balance={balance} onAddMoney={handleAddMoney} />
+          </div>
 
-        {/* TopBanner: hidden on small screens, visible at lg and above */}
-        <div className="hidden lg:block">
-          <TopBanner balance={balance} onAddMoney={handleAddMoney} />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4">
-          <ProvidersSectionInteractive />
-        </div>
-      </main>
+          <div className="max-w-7xl mx-auto px-4">
+            <ProvidersSectionInteractive />
+          </div>
+          <FAQ />
+        </main>
+      </div>
     </div>
   );
 }
