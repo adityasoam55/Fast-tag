@@ -30,6 +30,8 @@ export default function Dashboard() {
         <DashboardNavbar
           onMenuClick={() => setMobileSidebarOpen(true)}
           onLogout={handleLogout}
+          balance={balance}
+          setBalance={setBalance}
         />
       </div>
 
