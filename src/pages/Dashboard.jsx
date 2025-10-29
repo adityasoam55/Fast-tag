@@ -1,9 +1,7 @@
-// src/pages/Dashboard.jsx
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import Sidebar from "../components/layout/SideBar";
 import DashboardNavbar from "../components/layout/DashboardNavbar";
-import DashboardHome from "./DashboardHome"; // <-- renamed import
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -14,39 +12,9 @@ export default function Dashboard() {
     return b ? Number(b) : 0.0;
   });
 
-  const [txns, setTxns] = useState(() => {
-    const saved = sessionStorage.getItem("fastag_txns");
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch {}
-    }
-    return [
-      {
-        id: "T101",
-        date: "2025-10-27",
-        type: "Recharge",
-        amount: 200,
-        status: "Success",
-      },
-      {
-        id: "T100",
-        date: "2025-10-20",
-        type: "Toll Deduction",
-        amount: -45,
-        status: "Success",
-      },
-    ];
-  });
-
   useEffect(() => {
-    if (!emailFromSession) {
-      navigate("/", { replace: true });
-    }
-    sessionStorage.setItem("fastag_balance", String(balance));
-    sessionStorage.setItem("fastag_txns", JSON.stringify(txns));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // run once on mount
+    if (!emailFromSession) navigate("/", { replace: true });
+  }, [emailFromSession, navigate]);
 
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
@@ -55,32 +23,9 @@ export default function Dashboard() {
     navigate("/", { replace: true });
   }
 
-  function handleAddMoney() {
-    const val = window.prompt("Enter amount to add (₹):", "100");
-    if (!val) return;
-    const amt = Number(val);
-    if (isNaN(amt) || amt <= 0) {
-      alert("Please enter a valid amount.");
-      return;
-    }
-    const newBalance = +(Number(balance) + amt).toFixed(2);
-    setBalance(newBalance);
-    sessionStorage.setItem("fastag_balance", String(newBalance));
-    const newTxn = {
-      id: "T" + Math.floor(Math.random() * 9000 + 1000),
-      date: new Date().toLocaleDateString(),
-      type: "Recharge",
-      amount: amt,
-      status: "Success",
-    };
-    const updated = [newTxn, ...txns].slice(0, 50);
-    setTxns(updated);
-    sessionStorage.setItem("fastag_txns", JSON.stringify(updated));
-  }
-
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
-      {/* Dashboard Navbar (only on small screens) */}
+      {/* Navbar for mobile */}
       <div className="block lg:hidden fixed top-0 left-0 w-full z-50">
         <DashboardNavbar
           onMenuClick={() => setMobileSidebarOpen(true)}
@@ -96,9 +41,9 @@ export default function Dashboard() {
           onClose={() => setMobileSidebarOpen(false)}
         />
 
+        {/* Dynamic page content */}
         <main className="flex-1 p-6 overflow-auto">
-          {/* DashboardHome component handles TopBanner (hidden on small screens), providers and FAQ */}
-          <DashboardHome balance={balance} onAddMoney={handleAddMoney} />
+          <Outlet context={{ balance, setBalance }} />
         </main>
       </div>
     </div>

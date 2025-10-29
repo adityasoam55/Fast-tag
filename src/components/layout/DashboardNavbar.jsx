@@ -1,4 +1,3 @@
-// src/components/layout/DashboardNavbar.jsx
 import React from "react";
 import { FiMenu, FiLogOut } from "react-icons/fi";
 

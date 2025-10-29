@@ -3,28 +3,51 @@ import React from "react";
 import TopBanner from "../components/sections/TopBanner";
 import ProvidersSectionInteractive from "../components/sections/ProvidersSectionInteractive";
 import FAQ from "../components/sections/FAQ";
+import { useOutletContext } from "react-router-dom";
 
-/**
- * DashboardHome - main dashboard content (TopBanner, Providers grid, FAQ)
- *
- * Props:
- * - balance: number
- * - onAddMoney: function
- */
-export default function DashboardHome({ balance = 0, onAddMoney = () => {} }) {
+export default function DashboardHome() {
+  const { balance, setBalance } = useOutletContext();
+
+  function handleAddMoney() {
+    const val = window.prompt("Enter amount to add (₹):", "100");
+    if (!val) return;
+
+    const amt = Number(val);
+    if (isNaN(amt) || amt <= 0) {
+      alert("Please enter a valid amount.");
+      return;
+    }
+
+    // ✅ Update balance
+    const newBalance = +(Number(balance) + amt).toFixed(2);
+    setBalance(newBalance);
+    sessionStorage.setItem("fastag_balance", String(newBalance));
+
+    // ✅ Save transaction to sessionStorage
+    const existing = JSON.parse(sessionStorage.getItem("fastag_txns") || "[]");
+    const newTxn = {
+      id: "TXN" + Date.now(),
+      date: new Date().toLocaleString(),
+      amount: amt,
+      status: "Success",
+      type: "Recharge",
+    };
+    existing.unshift(newTxn);
+    sessionStorage.setItem("fastag_txns", JSON.stringify(existing));
+
+    alert(`₹${amt} added successfully!`);
+  }
+
   return (
     <div>
-      {/* TopBanner: hidden on small screens, visible at lg and above */}
       <div className="hidden lg:block">
-        <TopBanner balance={balance} onAddMoney={onAddMoney} />
+        <TopBanner balance={balance} onAddMoney={handleAddMoney} />
       </div>
 
-      {/* Providers / content area */}
       <div className="max-w-7xl mx-auto px-4">
         <ProvidersSectionInteractive />
       </div>
 
-      {/* FAQ section */}
       <div className="max-w-7xl mx-auto px-4 mt-8">
         <FAQ />
       </div>
