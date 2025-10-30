@@ -1,16 +1,119 @@
-# React + Vite
+# 🚗 FASTag Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive **FASTag Wallet Dashboard** built with **React.js** and **Tailwind CSS**.  
+Users can manage their FASTag wallet, recharge their account, and view complete recharge & transaction history — all in one place.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- 🔒 **Authentication** – Secure login with session persistence.
+- 💳 **Wallet Management** – View current balance and recharge instantly.
+- 📜 **Recharge History** – Displays all past transactions and recharges.
+- 🧭 **Dynamic Dashboard Navigation** – Sidebar with active page routing.
+- 📱 **Responsive Design** – Fully optimized for desktop, tablet, and mobile.
+- ⚙️ **LocalStorage Data Persistence** – Keeps user data even after refresh.
+- 🔔 **Instant UI Updates** – Balance and transactions sync across all pages.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧩 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend:** React.js (Vite or CRA)
+- **Styling:** Tailwind CSS
+- **Routing:** React Router v6
+- **State Management:** React Hooks (`useState`, `useEffect`)
+- **Storage:** LocalStorage & SessionStorage
+- **Icons:** React Icons (Feather Icons)
+
+---
+
+## 📁 Project Structure
+
+src/
+├── components/
+│ ├── auth/
+│ │ ├── LoginModalEmailJS.jsx
+│ │ └── PrivateRoute.jsx
+│ │
+│ ├── layout/
+│ │ ├── DashboardNavbar.jsx
+│ │ ├── Footer.jsx
+│ │ ├── Navbar.jsx
+│ │ └── SideBar.jsx
+│ │
+│ ├── sections/
+│ │ ├── AboutUs.jsx
+│ │ ├── FAQ.jsx
+│ │ ├── FastagBanner.jsx
+│ │ ├── HeroBanner.jsx
+│ │ ├── HeroSection.jsx
+│ │ ├── ProvidersSection.jsx
+│ │ ├── ProvidersSectionInteractive.jsx
+│ │ └── TopBanner.jsx
+│ │
+│ └── ui/
+│ ├── ProviderCard.jsx
+│ └── ProviderModal.jsx
+│
+├── data/
+│
+├── pages/
+│ ├── Dashboard.jsx
+│ ├── DashboardHome.jsx
+│ ├── HelpSupport.jsx
+│ ├── Home.jsx
+│ ├── Offers.jsx
+│ ├── RechargeHistory.jsx
+│ └── WalletHistory.jsx
+│
+├── App.jsx
+├── index.css
+└── main.jsx
+
+---
+
+## ⚡ Installation & Setup
+
+Follow these simple steps to run the project locally:
+
+```bash
+# 1️⃣ Clone the repository
+git clone https://github.com/adityasoam55/Fast-tag
+
+# 2️⃣ Move into the project folder
+cd fastag-dashboard
+
+# 3️⃣ Install dependencies
+npm install
+
+# 4️⃣ Start the development server
+npm run dev
+
+
+
+🔧 Key Functionalities
+💰 Add Money
+
+Click the Card icon in the top navigation bar.
+
+Enter an amount to add.
+
+Balance updates instantly (synced via LocalStorage).
+
+📄 Recharge & Wallet History
+
+Navigate via the Sidebar.
+
+Displays all previous recharge transactions stored in LocalStorage.
+
+📊 Dashboard Home
+
+Shows top banner with current balance.
+
+Displays available providers and FAQs.
+
+🧑‍💻 Author -
+👨‍💻 Aditya Som
+Frontend Developer | ReactJS | Tailwind CSS | REST APIs
+```

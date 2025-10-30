@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./components/auth/PrivateRoute";
 import Home from "./pages/Home";
 import DashboardHome from "./pages/DashboardHome";
 import RechargeHistory from "./pages/RechargeHistory";
