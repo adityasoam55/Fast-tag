@@ -19,7 +19,7 @@ export default function Navbar() {
                 className="w-10 h-10 rounded-md"
               />
               <h1 className="text-xl font-bold text-blue-600">
-                FASTag Recharge
+                FASTag Recharge I
               </h1>
             </div>
 
